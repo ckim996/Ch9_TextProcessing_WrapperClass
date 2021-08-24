@@ -5,51 +5,96 @@ import java.util.StringTokenizer;
 
 public class Test
 {
-    public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("src/sales.txt");
-        Scanner inputFile = new Scanner(file);
-        double total=0;
-        int count=0;
-        double finaltotal=0;
-        double greatest=0;
-        double lowest=Integer.MAX_VALUE;
-        int num=0;
-        int num1=0;
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        int count = 1;
+        char ch;
+        String s = "Hello my name is susie";
+        String t = s.replaceAll(" ", "");
+        System.out.print("String length: " + t.length());
+        System.out.println();
 
-        while(inputFile.hasNext())
+        char[] c = new char[t.length()];
+        int[] comparingArr = new int[c.length];
+
+        System.out.println(t);
+
+        for (int i = 0; i < c.length; i++)
         {
-            String s = inputFile.nextLine();
-            StringTokenizer token = new StringTokenizer(s,",");
-            count++;
-
-            while(token.hasMoreTokens())
-            {
-                total+=Double.parseDouble(token.nextToken());
-            }
-
-            if(total>greatest)
-            {
-                greatest=total;
-                num=count;
-            }
-
-            if (total<lowest)
-            {
-                lowest=total;
-                num1=count;
-            }
-
-
-            finaltotal+=total;
-
-            System.out.println("Week " + count + " Total : "+ total);
-            System.out.println("Week " + count + " Average : "+ (total/7));
-            total=0;
+            c[i] = t.charAt(i);
         }
-        System.out.println("Total Sales: "+ finaltotal);
-        System.out.println("Average Weekly Sales: "+ (finaltotal/count));
-        System.out.println("Highest Week Sales: " + "Week " + num + " with " + greatest );
-        System.out.println("Lowest Week Sales: " + "Week " + num1 + " with " + lowest );
+
+
+        for(int a = 0; a < c.length; a++)
+        {
+            System.out.print(c[a] + " ");
+        }
+
+        for(int j = 0; j < c.length; j++)
+        {
+            ch = c[j];
+            for(int k = j+1;k < c.length; k++)
+            {
+                if(ch == c[k])
+                {
+                    count++;
+                }
+            }
+            comparingArr[j] = count;
+            count = 1;
+        }
+
+        System.out.println();
+
+        for(int z = 0; z < comparingArr.length; z++)
+        {
+            System.out.print(comparingArr[z] + " ");
+        }
+
+
+        int bigC = comparingArr[0];
+        /*
+        System.out.println();
+        for(int y = 1; y < c.length; y++)
+        {
+            if(bigC < comparingArr[y])
+            {
+                comparingArr[y] = bigC;
+            }
+        }
+
+
+        ch = c[bigC];
+        System.out.println(ch);
+
+
+         */
+
+
+        StringBuilder sb = new StringBuilder();
+        for(int y = 1 ; y < comparingArr.length; y++)
+        {
+            if (bigC < comparingArr[y])
+            {
+                bigC = comparingArr[y];
+                sb.append(c[y]);
+            }
+
+            if(bigC == comparingArr[y])
+            {
+                bigC = comparingArr[y];
+                sb.append(c[y]);
+            }
+        }
+        String finalStr = sb.toString();
+        System.out.println();
+
+        for(int i = 0; i < finalStr.length(); i++)
+        {
+            System.out.print(finalStr.charAt(i) + " ");
+        }
+
+
     }
 }
 
